@@ -18,7 +18,7 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 
 application/config/database.php
 application/config/config.php
-api_test/
+apitest/
 DB SQL Query.txt
 
 # IDE Files
