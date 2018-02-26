@@ -9,7 +9,7 @@ $(function(){
     $.ajax({
       type: 'post',
       dataType: 'json',
-      url: 'http://localhost/coin/dev.php/updatecoin/get_json',
+      url: 'http://ec2-52-79-213-156.ap-northeast-2.compute.amazonaws.com/coin/index.php/updatecoin/get_json',
       success: function (data) {
         btc_krw = data.krw;
         btc_usdt= data.usdt;
@@ -18,20 +18,20 @@ $(function(){
         //alert('현재 BTC 가격은'+BTC+'원이다.');
       },
       error: function () {
-          alert('error');
+          alert('coin error');
       }
     });
     $.ajax({
       type: 'post',
       dataType: 'json',
-      url: 'http://localhost/coin/dev.php/updaterate/get_json',
+      url: 'http://ec2-52-79-213-156.ap-northeast-2.compute.amazonaws.com/coin/index.php/updaterate/get_json',
       success: function (data) {
         usd= data.krw;
         usdt=data.usdt;
         //alert('현재 USD 가격은'+USD+'원이다.');
       },
       error: function () {
-          alert('error');
+          alert('rate error');
       }
     });
     $('#BTC_bithumb').html(btc_krw+" KRW");
