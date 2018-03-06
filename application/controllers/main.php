@@ -27,6 +27,12 @@ class Main extends MY_Controller {
 		$this->load->view('write');
 		$this->_footer();
 	}
+	public function login()
+	{
+		$this->_head();
+		$this->load->view('login');
+		$this->_footer();
+	}
 
 }
 ?>

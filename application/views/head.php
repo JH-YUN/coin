@@ -33,9 +33,18 @@
             <button type="submit" class="btn btn-default">Search</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
-
-             <li><a href="#">Login</a></li>
-             <li><a href="#">회원가입</a></li>
+            <?php
+            if($this->session->userdata('is_login')){
+              ?>
+             <li><a href="/coin/dev.php/auth/logout">Logout</a></li>
+            <?php
+          } else{
+            ?>
+              <li><a href="/coin/dev.php/auth/login">Login</a></li>
+              <li><a href="#">회원가입</a></li>
+            <?php
+            }
+            ?>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">마이페이지 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
@@ -50,3 +59,6 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
 </nav>
+<?php
+if($this->session->userdata('is_login')){ echo $this->session->userdata('name')." 님 환영합니다.";}
+?>
