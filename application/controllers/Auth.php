@@ -79,6 +79,7 @@ class Auth extends MY_Controller {
 			password_verify($this->input->post('password'),$user->password)){
 				$this->session->set_userdata('is_login',true);
 				$this->session->set_userdata('name',$user->name);
+        $this->session->set_userdata('id',$user->id);
 				redirect('/');
 			}
 		else{
