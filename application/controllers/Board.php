@@ -24,6 +24,8 @@ class Board extends MY_Controller {
     $config['total_rows']=$total_topic;
     $config['per_page']=$list;
     $config['last_url']="http://localhost/coin/dev.php/board/index/{$total_topic}";
+    $config['base_url']='http://localhost/coin/dev.php/board/index/';
+    $config['first_url']='http://localhost/coin/dev.php/board/index/1';
     $this->load->library('pagination');
     $this->pagination->initialize($config);
     $pagination=$this->pagination->create_links();
@@ -105,6 +107,24 @@ class Board extends MY_Controller {
     $reply=(object)array('topic_id'=>$id,'user_id'=>$this->session->userdata('id'),'desc'=>$this->input->post('reply_desc'));
       $this->board_model->write_reply($reply);
     }
+  }
+  public function index_notice($page)  //공지사항 출력용
+  {
+    $this->load->library('pagination');
+    $list=20;
+    $this->load->model('board_model');
+    $total_notice=$this->board_model->get_notice_count();
+    $notice=$this->board_model->get_notice($page,$list);
+    $config['total_rows']=$total_notice;
+    $config['per_page']=$list;
+    $config['last_url']="http://localhost/coin/dev.php/board/index_notice/{$total_notice}";
+    $config['base_url']='http://localhost/coin/dev.php/board/index_notice/';
+    $config['first_url']='http://localhost/coin/dev.php/board/index_notice/1';
+    $this->pagination->initialize($config);
+    $pagination=$this->pagination->create_links();
+    $this->_head();
+    $this->load->view('board_notice',array('notice'=>$notice,'pagination'=>$pagination));
+    $this->_footer();
   }
 }
 ?>
