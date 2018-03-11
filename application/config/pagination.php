@@ -1,6 +1,9 @@
 <?php
-$config['base_url']='http://localhost/coin/dev.php/board/index/';
-$config['first_url']='http://localhost/coin/dev.php/board/index/1';
+$config['total_rows']='';
+$config['per_page']='';
+$config['base_url']='';
+$config['first_url']='';
+$config['last_url']='';
 $config['full_tag_open']='<nav><ul class="pagination">';
 $config['full_tag_close']='</ul></nav>';
 $config['first_link']='&lt;&lt;';
