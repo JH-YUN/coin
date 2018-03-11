@@ -18,13 +18,13 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="">Home</a>
+          <a class="navbar-brand" href="<?=site_url('main')?>">Home</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="./board_notice">공지 <span class="sr-only">(current)</span></a></li>
-            <li><a href="./board">게시판 </a></li>
+            <li class="active"><a href='<?=site_url("board/index_notice/1")?>'>공지 <span class="sr-only">(current)</span></a></li>
+            <li><a href="<?=site_url('board/index/1')?>">게시판 </a></li>
           </ul>
           <form class="navbar-form navbar-left" role="search">
             <div class="form-group">
@@ -36,12 +36,12 @@
             <?php
             if($this->session->userdata('is_login')){
               ?>
-             <li><a href="/coin/dev.php/auth/logout">Logout</a></li>
+             <li><a href="<?=site_url('auth/logout')?>">Logout</a></li>
             <?php
           } else{
             ?>
-              <li><a href="/coin/dev.php/auth/login">Login</a></li>
-              <li><a href="#">회원가입</a></li>
+              <li><a href="<?=site_url('auth/login').'?returnURL='.rawurlencode(current_url())?>">Login</a></li>
+              <li><a href="<?=site_url('auth/register')?>">회원가입</a></li>
             <?php
             }
             ?>
@@ -58,7 +58,8 @@
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
-</nav>
-<?php
-if($this->session->userdata('is_login')){ echo $this->session->userdata('name')." 님 환영합니다.";}
-?>
+    </nav>
+    <?php
+    if($this->session->userdata('is_login')){ echo $this->session->userdata('name')." 님 환영합니다.";}
+    ?>
+    <div class="container">
