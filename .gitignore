@@ -20,6 +20,7 @@ application/config/database.php
 application/config/config.php
 apitest/
 DB SQL Query.txt
+dev.php
 
 # IDE Files
 #-------------------------
