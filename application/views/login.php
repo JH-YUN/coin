@@ -2,7 +2,7 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-body">
-        <form class="form-group" action="/coin/dev.php/auth/confirm" method="post">
+        <form class="form-group" action='<?=site_url("auth/confirm")."?returnURL=".rawurlencode($returnURL)?>' method="post">
           <div class="form-group">
             <label for="input_email">이메일</label>
             <input id="input_email" class="form-control" type="email" name="email" placeholder="이메일을 입력해주세요">

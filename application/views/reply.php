@@ -1,4 +1,4 @@
-<form class="" action="/coin/dev.php/board/write_reply/<?=$id?>" method="post">
+<form class="" action='<?=site_url("board/write_reply/{$id}")?>' method="post">
   <?php foreach($reply as $reply){  ?>
      <p><?=$reply->name?> | <?=$reply->r_created?> |<?=$reply->description?> </p>
   <?php
