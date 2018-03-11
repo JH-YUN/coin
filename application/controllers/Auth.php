@@ -4,8 +4,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Auth extends MY_Controller {
   public function login()
   {
+
+    $returnURL=empty($this->input->get('returnURL'))? site_url('main') : $this->input->get('returnURL');//return URL의 유무 확인
     $this->_head();
-    $this->load->view("login");
+    $this->load->view("login",array('returnURL'=>$returnURL));
     $this->_footer();
   }
   public function register()
@@ -71,7 +73,7 @@ class Auth extends MY_Controller {
     }
     $this->_footer();
   }
-	public function confirm()
+	public function confirm()  //로그인시 유저 검증
 	{
 		$this->load->model('user_model');
 		$user=$this->user_model->confirm($this->input->post('email'))->row();
@@ -80,7 +82,7 @@ class Auth extends MY_Controller {
 				$this->session->set_userdata('is_login',true);
 				$this->session->set_userdata('name',$user->name);
         $this->session->set_userdata('id',$user->id);
-				redirect('/');
+				redirect($this->input->get('returnURL'));
 			}
 		else{
 				$this->session->set_flashdata('msg','이메일과 비밀번호를 확인해주세요.');
