@@ -19,25 +19,37 @@ class Board extends MY_Controller {
     $this->load->model('board_model');
     $this->load->model('user_model');
     $list=20;//페이지당 보일 게시물
-    $topic=$this->board_model->get($page, $list);
-    $total_topic=$this->board_model->get_count();//모든 게시물의 개수
-    $config['total_rows']=$total_topic;
-    $config['per_page']=$list;
-    $config['last_url']="http://localhost/coin/dev.php/board/index/{$total_topic}";
-    $config['base_url']='http://localhost/coin/dev.php/board/index/';
-    $config['first_url']='http://localhost/coin/dev.php/board/index/1';
-    $this->load->library('pagination');
-    $this->pagination->initialize($config);
-    $pagination=$this->pagination->create_links();
+    if(empty($this->input->get('search_type'))){
+      $topic=$this->board_model->get($page, $list);
+      $total_topic=$this->board_model->get_count();//모든 게시물의 개수
+      $config['total_rows']=$total_topic;
+      $config['per_page']=$list;
+      $config['last_url']=site_url("board/index/$total_topic");
+      $config['base_url']=site_url("board/index");
+      $config['first_url']=site_url("board/index/1");
+      $this->load->library('pagination');
+      $this->pagination->initialize($config);
+      $pagination=$this->pagination->create_links();
+    }
+    else{
+      $search_type=$this->input->get('search_type');
+      $keyword=$this->input->get('keyword');
+      $topic=$this->board_model->get_search($search_type,$keyword,$page, $list);
+      $search_topic=$this->board_model->get_search_count($search_type,$keyword);//모든 게시물의 개수
+      $config['total_rows']=$search_topic;
+      $config['per_page']=$list;
+      $config['page_query_string']=false;
+      $config['enable_query_string']=true;
+      $config['reuse_query_string']=TRUE;
+      $config['last_url']=site_url("board/index/$search_topic");
+      $config['base_url']=site_url("board/index/1");
+      $this->load->library('pagination');
+      $this->pagination->initialize($config);
+      $pagination=$this->pagination->create_links();
+    }
     $this->_head();
     $this->load->view('board',array('topic'=>$topic,'page'=>$page,'pagination'=>$pagination));
     //$this->load->view('board',array('topic'=>$topic));
-    $this->_footer();
-  }
-  public function board_notice()
-  {
-    $this->_head();
-    $this->load->view('board_notice');
     $this->_footer();
   }
   public function write()

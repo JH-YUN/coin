@@ -26,11 +26,12 @@
             <li class="active"><a href='<?=site_url("board/index_notice/1")?>'>공지 <span class="sr-only">(current)</span></a></li>
             <li><a href="<?=site_url('board/index/1')?>">게시판 </a></li>
           </ul>
-          <form class="navbar-form navbar-left" role="search">
+          <form class="navbar-form navbar-left" action='<?=site_url("board/index/1")?>' role="search">
             <div class="form-group">
-              <input type="text" class="form-control" placeholder="통합 검색">
+              <input type="text" class="form-control" name="keyword" placeholder="게시판 검색(제목+작성자)">
+              <input type="hidden" name="search_type" value="search_title_desc">
             </div>
-            <button type="submit" class="btn btn-default">Search</button>
+            <button type="submit"  class="btn btn-default">Search</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
             <?php
