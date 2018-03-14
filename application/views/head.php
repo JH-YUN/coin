@@ -28,7 +28,7 @@
           </ul>
           <form class="navbar-form navbar-left" action='<?=site_url("board/index/1")?>' role="search">
             <div class="form-group">
-              <input type="text" class="form-control" name="keyword" placeholder="게시판 검색(제목+작성자)">
+              <input type="text" class="form-control" name="keyword" placeholder="게시판 검색(제목+내용)">
               <input type="hidden" name="search_type" value="search_title_desc">
             </div>
             <button type="submit"  class="btn btn-default">Search</button>
