@@ -88,6 +88,60 @@ class Board extends MY_Controller {
       }
     }
   }
+  public function modify($id)
+  {
+    $this->load->model('board_model');
+    $topic=$topic=$this->board_model->read($id);
+    if($this->session->userdata('id') != $topic->u_id){
+      $this->_head();
+      $this->load->view('update_error',array('id'=>$id));
+      $this->_footer();
+    }
+    $this->load->library('form_validation');
+    $rules=array(
+      array(
+        'field'=>'title',
+        'label'=>'제목',
+        'rules'=>'required',
+        'errors'=>array('required'=>'제목을 입력해주세요.')),
+      array(
+        'field'=>'desc',
+        'label'=>'본문',
+        'rules'=>'required',
+        'errors'=>array('required'=>'본문을 입력해주세요'))
+      );
+    $this->form_validation->set_rules($rules);
+    if($this->form_validation->run()==false){
+      $this->_head();
+      $this->load->view('modify',array('topic'=>$topic,'id'=>$id));
+      $this->_footer();
+    }
+    else{
+      $modify_topic=(object)array('title'=>$this->input->post('title'),
+        'desc'=>$this->input->post('desc'),
+        'id'=>$id);
+      $this->board_model->modify($modify_topic);
+      redirect(site_url("board/read/$id"));
+    }
+  }
+  public function delete($id)
+  {
+    $this->load->model('board_model');
+    $topic=$topic=$this->board_model->read($id);
+    if($this->session->userdata('id') != $topic->u_id){
+      $this->_head();
+      $this->load->view('update_error',array('id'=>$id));
+      $this->_footer();
+    }
+    else
+    {
+      $this->_head();
+      $this->load->view('delete',array('topic',$topic));
+      $this->_footer();
+      $this->board_model->delete($id);
+      redirect(site_url('board/index/1'));
+    }
+  }
   public function read($id)
   {
     $this->load->model('board_model');

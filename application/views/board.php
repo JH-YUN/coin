@@ -15,7 +15,7 @@
     <?php foreach($topic as $topic){ ?>
     <tr name="<?=$topic->notice?>">
       <td name="<?=$topic->notice?>1"><?=$topic->t_id?></td>
-      <td name="title"><a href='<?=site_url("board/read/{$topic->t_id}")?>'><?=$topic->title?></a></td>
+      <td ><a name="title" href='<?=site_url("board/read/{$topic->t_id}")?>'><?=$topic->title?></a></td>
       <td name="name"><?=$topic->name?></td>
       <td><?=$topic->t_created?></td>
       <td><?=$topic->hit?></td>
@@ -32,7 +32,7 @@
           $(this).html( $(this).text().replace(regex, "<span class='search'>"+search+"</span>") );
       });
 
-    <?php }elseif($this->input->get('search_type')=="search_title"||"search_title_desc"){?>
+    <?php }if($this->input->get('search_type')==("search_title"||"search_title_desc")){?>
       var search = "<?=$this->input->get('keyword')?>";
       $("[name=title]:contains('"+search+"')").each(function () {
           var regex = new RegExp(search,'gi');

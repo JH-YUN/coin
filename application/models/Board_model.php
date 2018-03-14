@@ -135,5 +135,15 @@ class Board_model extends CI_Model{
     return $this->db->get()->num_rows();
     //return $this->db->count_all('topic');
   }
+  public function delete($id)
+  {
+    $this->db->delete('topic',array('id'=>$id));
+  }
+  public function modify($topic)
+  {
+    $data=array('title'=>$topic->title,'description'=>$topic->desc);
+    $this->db->where('id',$topic->id);
+    $this->db->update('topic',$data);
+  }
 }
 ?>
