@@ -127,7 +127,7 @@ class Board extends MY_Controller {
   public function delete($id)
   {
     $this->load->model('board_model');
-    $topic=$topic=$this->board_model->read($id);
+    $topic=$this->board_model->read($id);
     if($this->session->userdata('id') != $topic->u_id){
       $this->_head();
       $this->load->view('update_error',array('id'=>$id));
@@ -135,9 +135,6 @@ class Board extends MY_Controller {
     }
     else
     {
-      $this->_head();
-      $this->load->view('delete',array('topic',$topic));
-      $this->_footer();
       $this->board_model->delete($id);
       redirect(site_url('board/index/1'));
     }
@@ -153,9 +150,22 @@ class Board extends MY_Controller {
     $this->load->view('reply',array('id'=>$id,'reply'=>$reply));
     $this->_footer();
   }
+  public function read_reply($id)
+  {
+      $this->load->model('board_model');
+      $reply=$this->board_model->read_reply($id);
+      $this->_head();
+      $this->load->view('reply',array('id'=>$id,'reply'=>$reply));
+      $this->_footer();
+  }
+  public function delete_reply($topic_id,$id)
+  {
+    $this->load->model('board_model');
+    $this->board_model->delete_reply($topic_id,$id);
+    redirect("board/read/$topic_id");
+  }
   public function write_reply($id)
   {
-
     $this->load->library('form_validation');
     $rules=array(
       array(
@@ -166,12 +176,13 @@ class Board extends MY_Controller {
 
     $this->form_validation->set_rules($rules);
     if($this->form_validation->run()==false){
-
+      redirect(site_url("board/read/$id"));
     }
     else{
       $this->load->model('board_model');
-    $reply=(object)array('topic_id'=>$id,'user_id'=>$this->session->userdata('id'),'desc'=>$this->input->post('reply_desc'));
+      $reply=(object)array('topic_id'=>$id,'user_id'=>$this->session->userdata('id'),'desc'=>$this->input->post('reply_desc'));
       $this->board_model->write_reply($reply);
+      redirect(site_url("board/read/$id"));
     }
   }
   public function index_notice($page)  //공지사항 출력용

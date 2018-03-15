@@ -14,7 +14,7 @@
     <td><?=$topic->name?></td>
     <td><?=$topic->t_created?></td>
     <td><?=$topic->hit?></td>
-    <td></td>
+    <td><?=$topic->reply?></td>
   </tr>
   <?php } ?>
 </table>

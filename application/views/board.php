@@ -19,7 +19,7 @@
       <td name="name"><?=$topic->name?></td>
       <td><?=$topic->t_created?></td>
       <td><?=$topic->hit?></td>
-      <td></td>
+      <td><a onClick="window.open(this.href, '댓글', 'width=800, height=430, toolbar=0, resizalbe=0, menubar=0, location=0'); return false;" href='<?=site_url("board/read_reply/$topic->t_id")?>'><?=$topic->reply?></a></td>
     </tr>
   <?php } ?>
   <script type="text/javascript">

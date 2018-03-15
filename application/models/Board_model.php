@@ -13,9 +13,9 @@ class Board_model extends CI_Model{
     $this->db->where(array('topic.id'=>$id));
     return $this->db->get()->row();
   }
-  public function get($page,$list)//현재 page와 page에 표현될 list의 개수, ci 페이지네이션
+  public function get($page,$list)//현재 page와 page에 표현될 list의 개수, ci 페이지네이션 //모든 게시물 가져옴
   {
-    $this->db->select('topic.id as t_id,notice,topic.title,topic.description,topic.created as t_created,topic.hit,user.id as u_id,user.email,user.created as u_created,user.name');
+    $this->db->select('topic.id as t_id,notice,topic.title,topic.description,topic.created as t_created,topic.hit,topic.reply,user.id as u_id,user.email,user.created as u_created,user.name');
     $this->db->from('topic');
     $this->db->join('user','topic.user_id=user.id','left');
     // $this->db->limit($list,$page);
@@ -48,16 +48,21 @@ class Board_model extends CI_Model{
   }
   public function read_reply($id)
   {
-    $this->db->select('reply.id as r_id, reply.description, reply.created as r_created, reply.topic_id, user.id as u_id, user.name, user.created as u_created');
+    $this->db->select('reply.id as r_id, reply.description, reply.created as r_created, reply.topic_id, reply.user_id, user.id as u_id, user.name, user.created as u_created');
     $this->db->from('reply');
     $this->db->join('user','reply.user_id=user.id','left');
     $this->db->where('reply.topic_id',$id);
     return $this->db->get()->result();
   }
-  public function write_reply($reply)
+  public function write_reply($reply) //댓글 작성 후 댓글수++
   {
     $this->db->set('created','now()',false);
     $this->db->insert('reply',array('user_id'=>$reply->user_id,'topic_id'=>$reply->topic_id,'description'=>$reply->desc));
+    $this->db->select('reply');
+    $topic=$this->db->get_where('topic',array('id'=>$reply->topic_id))->row();
+    $this->db->set('reply',$topic->reply+1);
+    $this->db->where(array('id'=>$reply->topic_id));
+    $this->db->update('topic');
   }
   public function get_count()
   {
@@ -65,7 +70,7 @@ class Board_model extends CI_Model{
   }
   public function get_notice($page,$list)
   {
-    $this->db->select('topic.id as t_id,notice,topic.title,topic.description,topic.created as t_created,topic.hit,user.id as u_id,user.email,user.created as u_created,user.name');
+    $this->db->select('topic.id as t_id,notice,topic.title,topic.description,topic.created as t_created,topic.hit,topic.reply,user.id as u_id,user.email,user.created as u_created,user.name');
     $this->db->from('topic');
     $this->db->join('user','topic.user_id=user.id','left');
     $this->db->where('topic.notice',true);
@@ -138,6 +143,15 @@ class Board_model extends CI_Model{
   public function delete($id)
   {
     $this->db->delete('topic',array('id'=>$id));
+  }
+  public function delete_reply($topic_id,$id)
+  {
+    $this->db->where(array('id'=>$id,'user_id'=>$this->session->userdata('id')));
+    $this->db->delete('reply');
+    $topic=$this->db->get_where('topic',array('id'=>$topic_id))->row();
+    $this->db->set('reply',$topic->reply-1);
+    $this->db->where(array('id'=>$topic_id));
+    $this->db->update('topic');
   }
   public function modify($topic)
   {
