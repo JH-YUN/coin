@@ -7,8 +7,15 @@
      <link href="/coin/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
    </head>
+   <?php  //특정 페이지에서 네비게이션 바를 보이지 않음
+   if($this->uri->segment(2)=='read_reply'){
+    ?>
+    <script type="text/javascript">
+      $('#head-nav').hide();
+    </script>
+  <?php } ?>
    <body>
-     <nav class="navbar navbar-default">
+     <nav id="head-nav" class="navbar navbar-default">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -49,10 +56,10 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">마이페이지 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
+                <li><a href="#">내 정보</a></li>
                 <li class="divider"></li>
+                <li><a href='<?=site_url("user/mytopic/1")?>'>내 게시물</a></li>
+                <li><a href="#">Something else here</a></li>
                 <li><a href="#">Separated link</a></li>
               </ul>
             </li>
@@ -60,7 +67,9 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
-    <?php
-    if($this->session->userdata('is_login')){ echo $this->session->userdata('name')." 님 환영합니다.";}
-    ?>
     <div class="container">
+      <div class="alert alert-info">
+      <?php
+      if($this->session->userdata('is_login')){ echo $this->session->userdata('name')." 님 환영합니다.";}
+      ?>
+      </div>

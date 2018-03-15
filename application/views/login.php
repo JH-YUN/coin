@@ -12,7 +12,12 @@
             <input id="input_password" class="form-control" type="password" name="password" placeholder="비밀번호를 입력해주세요">
           </div>
         <?php
-        echo $this->session->flashdata('msg');
+        if(!empty($this->session->flashdata('msg'))){ ?>
+        <div class="alert alert-warning">
+          <?=$this->session->flashdata('msg')?>
+        </div>
+        <?php
+        }
         ?>
       </div>
       <div class="modal-footer">
