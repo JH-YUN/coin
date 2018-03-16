@@ -42,7 +42,7 @@ $(function(){
     $.ajax({
       type: 'post',
       dataType: 'json',
-      url: 'http://localhost/coin/dev.php/update/get_json',
+      url: 'http://ec2-13-124-38-77.ap-northeast-2.compute.amazonaws.com/coin/index.php/update/get_json',
       success: function (data) {
         $('#BTC_bithumb').html(data[1].krw+" KRW");
         $('#BTC_binance').html(CalKrw(data.krw,data.usdt,data[1].usdt)+" KRW");
