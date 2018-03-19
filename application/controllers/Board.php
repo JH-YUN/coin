@@ -203,5 +203,33 @@ class Board extends MY_Controller {
     $this->load->view('board_notice',array('notice'=>$notice,'pagination'=>$pagination));
     $this->_footer();
   }
+  function upload_img()
+  {
+    // 사용자가 업로드 한 파일을 /static/user/ 디렉토리에 저장한다.
+    $config['upload_path'] = FCPATH.'/static/img/';
+    // git,jpg,png 파일만 업로드를 허용한다.
+    $config['allowed_types'] = 'gif|jpg|png';
+    // 허용되는 파일의 최대 사이즈
+    $config['max_size'] = '2000';
+    // 이미지인 경우 허용되는 최대 폭
+    $config['max_width']  = '1024';
+    // 이미지인 경우 허용되는 최대 높이
+    $config['max_height']  = '768';
+    $this->load->library('upload');
+    $this->upload->initialize($config);
+    if(!$this->upload->do_upload("upload"))
+    {
+      //$error=array('error'=>$this->upload->display_errors());
+      //$this->load->view('upload_form',$errors);
+      echo "<script>alert('업로드에 실패했습니다. {$this->upload->display_errors('','')}')</script>";
+    }
+    else{
+      $datas=$this->upload->data();
+      $CKEditorFuncNum=$this->input->get('CKEditorFuncNum');
+      $filename=$datas['file_name'];
+      $url="/coin/static/img/{$filename}";
+      echo "<script type='text/javascript'>window.parent.CKEDITOR.tools.callFunction('{$CKEditorFuncNum}', '{$url}', '전송완료')</script>";
+    }
+  }
 }
 ?>

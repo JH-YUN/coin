@@ -1,0 +1,9 @@
+
+*/1 * * * * /opt/lampp/bin/php /opt/lampp/htdocs/coin/index.php update update_coin
+*/1 * * * * sleep 10; /opt/lampp/bin/php /opt/lampp/htdocs/coin/index.php update update_coin
+*/1 * * * * sleep 20; /opt/lampp/bin/php /opt/lampp/htdocs/coin/index.php update update_coin
+*/1 * * * * sleep 30; /opt/lampp/bin/php /opt/lampp/htdocs/coin/index.php update update_coin
+*/1 * * * * sleep 40; /opt/lampp/bin/php /opt/lampp/htdocs/coin/index.php update update_coin
+*/1 * * * * sleep 50; /opt/lampp/bin/php /opt/lampp/htdocs/coin/index.php update update_coin
+
+* */1 * * * /opt/lampp/bin/php /opt/lampp/htdocs/coin/index.php update update_rate
