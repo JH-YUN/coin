@@ -23,6 +23,7 @@ application/config/config_ubuntu.php
 apitest/
 DB SQL Query.txt
 dev.php
+static/img/*
 
 # IDE Files
 #-------------------------
