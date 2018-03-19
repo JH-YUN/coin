@@ -68,8 +68,7 @@
       </div><!-- /.container-fluid -->
     </nav>
     <div class="container">
-      <div class="alert alert-info">
       <?php
-      if($this->session->userdata('is_login')){ echo $this->session->userdata('name')." 님 환영합니다.";}
-      ?>
-      </div>
+      if($this->session->userdata('is_login')){
+    echo '<div class="alert alert-info">'.$this->session->userdata('name')." 님 환영합니다.".'</div>';
+   }?>
