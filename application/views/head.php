@@ -7,13 +7,6 @@
      <link href="/coin/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
      <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
    </head>
-   <?php  //특정 페이지에서 네비게이션 바를 보이지 않음
-   if($this->uri->segment(2)=='read_reply'){
-    ?>
-    <script type="text/javascript">
-      $('#head-nav').hide();
-    </script>
-  <?php } ?>
    <body>
      <nav id="head-nav" class="navbar navbar-default">
       <div class="container-fluid">
@@ -30,8 +23,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="active"><a href='<?=site_url("board/index_notice/1")?>'>공지 <span class="sr-only">(current)</span></a></li>
-            <li><a href="<?=site_url('board/index/1')?>">게시판 </a></li>
+            <li id="head-nav-notice"><a href='<?=site_url("board/index_notice/1")?>'>공지 <span class="sr-only">(current)</span></a></li>
+            <li id="head-nav-index"><a href="<?=site_url('board/index/1')?>">게시판 </a></li>
           </ul>
           <form class="navbar-form navbar-left" action='<?=site_url("board/index/1")?>' role="search">
             <div class="form-group">
@@ -44,7 +37,7 @@
             <?php
             if($this->session->userdata('is_login')){
               ?>
-             <li><a href="<?=site_url('auth/logout')?>">Logout</a></li>
+             <li><a href="<?=site_url('auth/logout').'?returnURL='.rawurlencode(current_url())?>">Logout</a></li>
             <?php
           } else{
             ?>
@@ -67,6 +60,24 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+    <?php  //특정 페이지에서 네비게이션 바를 보이지 않음
+    if($this->uri->segment(2)=='read_reply'){
+     ?>
+     <script type="text/javascript">
+       $('#head-nav').hide();
+     </script>
+   <?php } ?>
+   <script type="text/javascript">
+   var navID='<?=$this->uri->segment(2);?>'
+   switch (navID) {
+     case 'index':
+       $('#head-nav-index').attr('class','active');
+       break;
+     case 'index_notice':
+       $('#head-nav-notice').attr('class','active');
+       break;
+   }
+   </script>
     <div class="container">
       <?php
       if($this->session->userdata('is_login')){
