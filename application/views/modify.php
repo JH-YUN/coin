@@ -6,9 +6,14 @@
   </div>
     <input class="btn btn-success" type="submit" name="" value="제출" >
 </form>
-  <script src="/codeigniter/static/lib/ckeditor/ckeditor.js"></script>
-  <!-- <script>
-    CKEDITOR.replace('desc',{
-      'filebrowserUploadUrl':'/codeigniter/index.php/topic/upload_receive_fromck'
-    });
-  </script> -->
+<script src="/coin/static/ckeditor/ckeditor.js"></script>
+<script>
+var config={};
+config.extraPlugins='confighelper';
+config.placeholder='내용을 입력하세요';
+config.filebrowserUploadUrl='/coin/dev.php/board/upload_img';
+  // CKEDITOR.replace('desc',{
+  //   'filebrowserUploadUrl':'/codeigniter/index.php/topic/upload_receive_fromck'
+  // });
+CKEDITOR.replace('desc',config);
+</script>
