@@ -1,23 +1,23 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends MY_Controller {
-  public function login()
-  {
-
-    $returnURL=empty($this->input->get('returnURL'))? site_url('main') : $this->input->get('returnURL');//return URL의 유무 확인
-    $this->_head();
-    $this->load->view("login",array('returnURL'=>$returnURL));
-    $this->_footer();
-  }
-  public function register()
-  {
-    $this->load->library("form_validation");
-    // $this->form_validation->set_rules('register_email','이메일','required|is_unique[user.email]');
-    // $this->form_validation->set_rules('register_password','비밀번호','required');
-    // $this->form_validation->set_rules('register_password_verify','비밀번호 확인','required|matches[register_password]');
-    // $this->form_validation->set_rules('register_name','닉네임','required|is_unique[user.name]|max_length[30]');
-    $rules=array(
+class Auth extends MY_Controller
+{
+    public function login()
+    {
+        $returnURL=empty($this->input->get('returnURL'))? site_url('main') : $this->input->get('returnURL');//return URL의 유무 확인
+        $this->_head();
+        $this->load->view("login", array('returnURL'=>$returnURL));
+        $this->_footer();
+    }
+    public function register()
+    {
+        $this->load->library("form_validation");
+        // $this->form_validation->set_rules('register_email','이메일','required|is_unique[user.email]');
+        // $this->form_validation->set_rules('register_password','비밀번호','required');
+        // $this->form_validation->set_rules('register_password_verify','비밀번호 확인','required|matches[register_password]');
+        // $this->form_validation->set_rules('register_name','닉네임','required|is_unique[user.name]|max_length[30]');
+        $rules=array(
       array(
         'field'=>'email',
         'label'=>'이메일',
@@ -55,45 +55,41 @@ class Auth extends MY_Controller {
                   )
                 )
     );
-    $this->form_validation->set_rules($rules);
-    $this->_head();
-    if($this->form_validation->run()==false){
-      $this->load->view("register");
+        $this->form_validation->set_rules($rules);
+        $this->_head();
+        if ($this->form_validation->run()==false) {
+            $this->load->view("register");
+        } else {
+            //디비에 회원 추가
+            $pwd=password_hash($this->input->post('password'), PASSWORD_BCRYPT);
+            $user=array('email'=>$this->input->post('email'),
+                'password'=>$pwd,
+                'name'=>$this->input->post('name'));
+            $this->load->model('user_model');
+            $this->user_model->register($user);
+            $this->session->set_flashdata('msg', '가입을 축하합니다. 로그인 해주세요.');
+            redirect('/auth/login');
+        }
+        $this->_footer();
     }
-    else{
-      //디비에 회원 추가
-			$pwd=password_hash($this->input->post('password'),PASSWORD_BCRYPT);
-			$user=array('email'=>$this->input->post('email'),
-				'password'=>$pwd,
-				'name'=>$this->input->post('name'));
-			$this->load->model('user_model');
-			$this->user_model->register($user);
-			$this->session->set_flashdata('msg','가입을 축하합니다. 로그인 해주세요.');
-			redirect('/auth/login');
+    public function confirm()  //로그인시 유저 검증
+    {
+        $this->load->model('user_model');
+        $user=$this->user_model->confirm($this->input->post('email'))->row();
+        if ($user->email==$this->input->post('email')&&
+            password_verify($this->input->post('password'), $user->password)) {
+            $this->session->set_userdata('is_login', true);
+            $this->session->set_userdata('name', $user->name);
+            $this->session->set_userdata('id', $user->id);
+            redirect($this->input->get('returnURL'));
+        } else {
+            $this->session->set_flashdata('msg', '이메일과 비밀번호를 확인해주세요.');
+            redirect('/auth/login');
+        }
     }
-    $this->_footer();
-  }
-	public function confirm()  //로그인시 유저 검증
-	{
-		$this->load->model('user_model');
-		$user=$this->user_model->confirm($this->input->post('email'))->row();
-		if($user->email==$this->input->post('email')&&
-			password_verify($this->input->post('password'),$user->password)){
-				$this->session->set_userdata('is_login',true);
-				$this->session->set_userdata('name',$user->name);
-        $this->session->set_userdata('id',$user->id);
-				redirect($this->input->get('returnURL'));
-			}
-		else{
-				$this->session->set_flashdata('msg','이메일과 비밀번호를 확인해주세요.');
-				redirect('/auth/login');
-		}
-	}
-	public function logout()
-	{
-		$this->session->sess_destroy();
-		redirect('/');
-	}
-
+    public function logout()
+    {   $returnURL=empty($this->input->get('returnURL'))? site_url('main') : $this->input->get('returnURL');//return URL의 유무 확인
+        $this->session->sess_destroy();
+        redirect("$returnURL");
+    }
 }
-?>
