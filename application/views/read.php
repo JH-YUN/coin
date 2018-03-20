@@ -1,17 +1,21 @@
   <article>
-    <h1>
-      <?=$topic->title?>
-    </h1>
-      <div>
-        <div class="">
-          <?=$topic->t_created?>
-        </div>
+    <table class="table">
+      <tr>
+        <td colspan='3' class="page-header"><small>제목</small> <?=$topic->title?></td>
+      </tr>
+      <tr>
+        <td><small>작성자</small> <?=$topic->name?></td>
+        <td><small>작성시간</small> <?=$topic->t_created?></td>
+        <td><small>조회수</small> <?=$topic->hit?></td>
+      </tr>
+      <tr>
+        <td colspan="3"></td>
+      </tr>
+    </table>
         <?=$topic->description?>
-      </div>
   </article>
   <a href='<?=site_url("board/modify/$topic->t_id")?>' class="btn btn-default">수정</a>
   <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-modal">삭제</button>
-
   <div class="modal fade" id="delete-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
