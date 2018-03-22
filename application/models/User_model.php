@@ -27,5 +27,15 @@ class User_model extends CI_Model{
     $this->db->where('user_id',$this->session->userdata('id'));
     return $this->db->get('topic')->num_rows();
   }
+  public function myreply_count()
+  {
+    $this->db->where('user_id',$this->session->userdata('id'));
+    return $this->db->get('reply')->num_rows();
+  }
+  public function mypage()
+  {
+    $this->db->where('id',$this->session->userdata('id'));
+    return $this->db->get('user')->row();
+  }
 }
 ?>

@@ -9,7 +9,14 @@ class User extends MY_Controller {
       $this->session->set_flashdata('msg','로그인이 필요한 서비스입니다.');
       redirect('/auth/login');
     }
-    $this->load->model('User_model');
+    $this->load->helper('time_cut');
+    $this->load->model('user_model');
+    $user=$this->user_model->mypage();
+    $myreply=$this->user_model->myreply_count();
+    $mytopic=$this->user_model->mytopic_count();
+    $this->_head();
+    $this->load->view('mypage',array('user'=>$user,'mytopic'=>$mytopic,'myreply'=>$myreply));
+    $this->_footer();
   }
   public function mytopic($page)
   {
