@@ -1,4 +1,5 @@
 <table class="table">
+  <caption><?=$this->session->userdata('name')?> 님이 작성하신 게시물입니다.</caption>
   <tr>
     <th>번호</th>
     <th>제목</th>

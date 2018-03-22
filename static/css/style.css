@@ -46,3 +46,28 @@
   background-color: #5bc0de;
   border-color: #5bc0de;
 }
+/* .glyphicon-search{
+  color: black !important;
+  background-color: #000000 !important;
+} */
+.btn-black{
+  border-width:1px;
+  border-style: solid;
+  border-color:#828282;
+  background-color: black;
+  color:black;
+}
+#mypage-title{
+  padding-bottom:30px;
+}
+.col-md-3{
+  border-left:solid #dddddd 5px;
+}
+.btn-xxs,
+.btn-group-xxs > .btn {
+  padding: 0.3px 0.3px;
+  font-size: 1px;
+  line-height: 1;
+  border-radius: 2px;
+  color:#000000;
+}

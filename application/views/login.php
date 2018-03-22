@@ -21,7 +21,7 @@
         ?>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">취소</button>
+        <a href="<?=$this->input->get('returnURL')?>" class="btn btn-default" data-dismiss="modal">취소</a>
         <input type="submit" class="btn btn-primary" value="로그인">
         </form>
       </div>

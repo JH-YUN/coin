@@ -22,11 +22,13 @@
             <li id="head-nav-index"><a href="<?=site_url('board/index/1')?>"><span>게시판</span> </a></li>
           </ul>
           <form class="navbar-form navbar-left" action='<?=site_url("board/index/1")?>' role="search">
-            <div class="form-group">
+            <div class="input-group input-group-sm">
               <input type="text" class="form-control" name="keyword" placeholder="게시판 검색(제목+내용)">
               <input type="hidden" name="search_type" value="search_title_desc">
+              <span class="input-group-btn">
+                <button type="submit"  class="btn btn-black"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+              </span>
             </div>
-            <button type="submit"  class="btn btn-default">Search</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
             <?php
@@ -44,7 +46,7 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span>마이페이지</span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#"><span>내 정보</span></a></li>
+                <li><a href="<?=site_url('user/mypage')?>"><span>내 정보</span></a></li>
                 <li class="divider"></li>
                 <li><a href='<?=site_url("user/mytopic/1")?>'><span>내 게시물</span></a></li>
               </ul>
