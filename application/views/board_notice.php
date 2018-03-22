@@ -16,6 +16,6 @@
     <td><?=$topic->hit?></td>
     <td><?=$topic->reply?></td>
   </tr>
-  <?php } ?>
+<?php } ?>
 </table>
-  <?php echo $pagination ?>
+  <div id="board-page"><?php echo $pagination ?></div>

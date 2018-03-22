@@ -32,5 +32,5 @@
     <button type="submit" class="btn btn-default">Search</button>
     </div>
 </form>
-  <?php echo $pagination ?>
+  <div id="board-page"><?php echo $pagination ?></div>
 <a class="btn btn-primary" href='<?=site_url("board/write/")?>'>글쓰기</a>

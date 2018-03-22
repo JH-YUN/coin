@@ -41,7 +41,8 @@
     <?php } ?>
   </script>
   </table>
-  <form class="form-inline" action='<?=site_url("board/index/1")?>'>
+  <div id="board-write_btn"><a class="btn btn-primary" href='<?=site_url("board/write/")?>'>글쓰기</a></div>
+  <form id="board-search" class="form-inline" action='<?=site_url("board/index/1")?>'>
     <div class="form-group">
       <select class="form-control" name="search_type">
         <option value="search_title_desc">제목+내용</option>
@@ -53,5 +54,4 @@
       <button type="submit" class="btn btn-default">Search</button>
       </div>
   </form>
-    <?php echo $pagination ?>
-  <a class="btn btn-primary" href='<?=site_url("board/write/")?>'>글쓰기</a>
+    <div id="board-page"><?php echo $pagination ?></div>

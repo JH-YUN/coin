@@ -1,0 +1,48 @@
+#board-page{
+  text-align:center;
+  color:#5bc0de;
+}
+#board-write_btn{
+  text-align:right;
+}
+#board-search{
+  text-align:center;
+}
+#head-nav{
+  background-color:black;
+  border-style: none;
+}
+#head-nav .dropdown-menu{
+  background-color:black;
+}
+#head-nav span{
+  color:white;
+}
+.nav-selected{
+  background-color:grey;
+}
+.navbar-brand{
+  background-color:#5bc0de;
+  color:white;
+}
+#read-delete_btn{
+  text-align: right;
+}
+/* .navbar-brand span{
+  color:white;
+}
+.navbar-nav span{
+  color:white;
+} */
+.pagination > .active > a,
+.pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
+.pagination > .active > a:focus,
+.pagination > .active > span:focus {
+  z-index: 3;
+  color: #fff;
+  cursor: default;
+  background-color: #5bc0de;
+  border-color: #5bc0de;
+}
