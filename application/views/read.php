@@ -12,7 +12,25 @@
         <td colspan="3"></td>
       </tr>
     </table>
-        <?=$topic->description?>
+    <div id="read-desc">
+      <?=$topic->description?>
+    </div>
+
+    <div id="read-user-profile" class="row">
+        <div id="read-user-profile-img" class="col-md-1">
+          <?php if(file_get_contents(FCPATH."/static/user_img/$user->id.jpg",FALSE)){?>
+          <img src="/coin/static/user_img/<?=$user->id?>.jpg" alt="프로필 사진" height="100" width="100">
+          <?php }else{ ?>
+          <img src="/coin/static/user_img/default.jpg" alt="프로필 사진" height="100" width="100">
+          <?php } ?>
+        </div>
+        <div id="read-user-profile-info" class="col-md-8">
+          <h4><?=$topic->name?></h4>
+          <br>
+          <?=$topic->info?>
+        </div>
+
+    </div>
   </article>
   <div id="read-delete_btn">
     <a href='<?=site_url("board/modify/$topic->t_id")?>' class="btn btn-default btn-sm">수정</a>

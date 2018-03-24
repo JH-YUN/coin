@@ -37,5 +37,10 @@ class User_model extends CI_Model{
     $this->db->where('id',$this->session->userdata('id'));
     return $this->db->get('user')->row();
   }
+  public function update_profile($string)
+  {
+    $this->db->where('id',$this->session->userdata('id'));
+    $this->db->update('user',array('info'=>$string));
+  }
 }
 ?>

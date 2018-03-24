@@ -9,7 +9,7 @@ class Board_model extends CI_Model
     public function read($id)
     {
         //return $this->db->get_where('topic',array('id'=>$id))->row();
-        $this->db->select('topic.id as t_id,notice,topic.title,topic.description,topic.created as t_created,topic.hit,user.id as u_id,user.email,user.created as u_created,user.name');
+        $this->db->select('topic.id as t_id,notice,topic.title,topic.description,topic.created as t_created,topic.hit,user.id as u_id,user.email,user.created as u_created,user.name,user.info');
         $this->db->from('topic');
         $this->db->join('user', 'topic.user_id=user.id', 'left');
         $this->db->where(array('topic.id'=>$id));

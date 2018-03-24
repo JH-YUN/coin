@@ -71,3 +71,32 @@
   border-radius: 2px;
   color:#000000;
 }
+#mypage-profile{
+  padding-top:30px;
+}
+#mypage-info{
+  padding-top:30px;
+}
+textarea{
+  resize:none;
+}
+#mypage-profile-img{
+  border:solid grey 1px;
+}
+#read-user-profile{
+  padding:20px;
+  border: solid grey 1px;
+  margin-top:50px;
+  margin-bottom:20px;
+  margin-left:0px;
+  margin-right:0px;
+}
+#read-user-profile-img{
+  margin-right:30px;
+}
+#read-user-profile-info{
+
+}
+#read-desc{
+  margin-left:15px;
+}
