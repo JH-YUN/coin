@@ -55,12 +55,12 @@ class User extends MY_Controller
         $this->load->library('upload', $config);
         print_r($this->input->post('user_img'));
         print_r($_FILES);
-        if(empty($_FILES['user_img']['type'])){
-          $this->user_model->update_profile($info);
-          //redirect('user/mypage');
+        if (empty($_FILES['user_img']['type'])) {
+            $this->user_model->update_profile($info);
+        //redirect('user/mypage');
         } else {
             if (!$this->upload->do_upload('user_img')) {
-                $this->session->set_flashdata('err_msg',$this->upload->display_errors('', ''));
+                $this->session->set_flashdata('err_msg', $this->upload->display_errors('', ''));
                 redirect('user/mypage');
             } else {
                 $img_name=$this->upload->data('file_name');
@@ -68,12 +68,24 @@ class User extends MY_Controller
                 $config['source_image'] = FCPATH."/static/user_img/$img_name";
                 $config['width']=100;
                 $config['height']=100;
-                $this->load->library('image_lib',$config);
+                $this->load->library('image_lib', $config);
                 $this->image_lib->resize();
                 $this->user_model->update_profile($info);
                 redirect('user/mypage');
-              }
             }
+        }
+    }
+    public function userprofile()
+    {
+      $this->load->model('user_model');
+      $this->load->helper('time_cut');
+      $user=$this->user_model->get_userprofile($this->input->get('user'));
+      $topic=$this->user_model->topic_count($this->input->get('user'));
+      $reply=$this->user_model->reply_count($this->input->get('user'));
+      $this->_head();
+      $this->load->view('userprofile',array('user'=>$user,'topic'=>$topic,'reply'=>$reply));
+      $this->_footer();
+
     }
 }
 // }

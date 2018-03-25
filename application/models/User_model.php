@@ -42,5 +42,30 @@ class User_model extends CI_Model{
     $this->db->where('id',$this->session->userdata('id'));
     $this->db->update('user',array('info'=>$string));
   }
+  public function get_userprofile($id)
+  {
+    $this->db->select('id,created,name,info');
+    return $this->db->get_where('user',array('id'=>$id))->row();
+  }
+  public function topic_count($id)
+  {
+    $this->db->where('user_id',$id);
+    return $this->db->get('topic')->num_rows();
+  }
+  public function reply_count($id)
+  {
+    $this->db->where('user_id',$id);
+    return $this->db->get('reply')->num_rows();
+  }
+  public function getIDfromName($name)
+  {
+    $this->db->select('id');
+    return $this->db->get_where('user',array('name'=>$name))->row()->id;
+  }
+  public function getNamefromID($id)
+  {
+    $this->db->select('name');
+    return $this->db->get_where('user',array('id'=>$id))->row()->name;
+  }
 }
 ?>

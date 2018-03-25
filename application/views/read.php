@@ -15,20 +15,37 @@
     <div id="read-desc">
       <?=$topic->description?>
     </div>
-
-    <div id="read-user-profile" class="row">
-        <div id="read-user-profile-img" class="col-md-1">
-          <?php if(file_get_contents(FCPATH."/static/user_img/$topic->u_id.jpg",FALSE)){?>
-          <img src="/coin/static/user_img/<?=$topic->u_id?>.jpg" alt="프로필 사진" height="100" width="100">
-          <?php }else{ ?>
-          <img src="/coin/static/user_img/default.jpg" alt="프로필 사진" height="100" width="100">
-          <?php } ?>
+    <div id="read-user-profile" class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          <?=$topic->name?>
+          <div class="btn-group">
+            <button type="button" class="btn btn-default dropdown-toggle btn-xs" data-toggle="dropdown" aria-expanded="false">
+              ... <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+              <li><a href="<?=site_url('user/userprofile')?>?user=<?=$topic->u_id?>">유저 정보</a></li>
+              <li><a href="<?=site_url('board/index/1')?>?search_type=search_name&keyword=<?=$topic->name?>">작성글 검색</a></li>
+              <li><a href="#">쪽지 보내기</a></li>
+            </ul>
+          </div>
+        </h4>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+            <div id="read-user-profile-img" class="col-md-1">
+              <?php if(file_get_contents(FCPATH."/static/user_img/$topic->u_id.jpg",FALSE)){?>
+              <img src="/coin/static/user_img/<?=$topic->u_id?>.jpg" alt="프로필 사진" height="100" width="100">
+              <?php }else{ ?>
+              <img src="/coin/static/user_img/default.jpg" alt="프로필 사진" height="100" width="100">
+              <?php } ?>
+            </div>
+            <div id="read-user-profile-info" class="col-md-8">
+              <br>
+              <?=$topic->info?>
+            </div>
         </div>
-        <div id="read-user-profile-info" class="col-md-8">
-          <h4><?=$topic->name?></h4>
-          <br>
-          <?=$topic->info?>
-        </div>
+      </div>
     </div>
   </article>
   <div id="read-delete_btn">
