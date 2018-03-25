@@ -24,6 +24,7 @@ apitest/
 DB SQL Query.txt
 dev.php
 static/img/*
+static/user_img/*
 
 # IDE Files
 #-------------------------
