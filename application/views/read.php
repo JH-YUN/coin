@@ -18,8 +18,8 @@
 
     <div id="read-user-profile" class="row">
         <div id="read-user-profile-img" class="col-md-1">
-          <?php if(file_get_contents(FCPATH."/static/user_img/$user->id.jpg",FALSE)){?>
-          <img src="/coin/static/user_img/<?=$user->id?>.jpg" alt="프로필 사진" height="100" width="100">
+          <?php if(file_get_contents(FCPATH."/static/user_img/$topic->u_id.jpg",FALSE)){?>
+          <img src="/coin/static/user_img/<?=$topic->u_id?>.jpg" alt="프로필 사진" height="100" width="100">
           <?php }else{ ?>
           <img src="/coin/static/user_img/default.jpg" alt="프로필 사진" height="100" width="100">
           <?php } ?>
@@ -29,7 +29,6 @@
           <br>
           <?=$topic->info?>
         </div>
-
     </div>
   </article>
   <div id="read-delete_btn">
