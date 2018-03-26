@@ -1,4 +1,4 @@
-<div class="col-md-10">
+<div class="col-xs-9">
 
 
   <form action="<?=site_url('message/send')?>" method="POST">
@@ -14,7 +14,7 @@
       <?php endif; ?>
       <p><label for="">본문</label><textarea class="form-control" name="desc" id="desc" cols="30" rows="10" placeholder="내용을 입력하세요" value=""><?=set_value('desc')?></textarea></p>
     </div>
-      <input class="btn btn-success" type="submit" name="" value="보내기" >
+      <input id="message-send-submit_btn" class="btn btn-success" type="submit" name="" value="보내기" >
   </form>
 </div>
 
@@ -24,6 +24,8 @@ var config={};
 config.extraPlugins='confighelper';
 config.placeholder='내용을 입력하세요';
 config.filebrowserUploadUrl='/coin/dev.php/board/upload_img';
+config.language='kr';
+config.toolbar = [];
   // CKEDITOR.replace('desc',{
   //   'filebrowserUploadUrl':'/codeigniter/index.php/topic/upload_receive_fromck'
   // });

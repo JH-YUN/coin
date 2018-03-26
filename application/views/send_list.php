@@ -3,7 +3,7 @@
     background-color:yellow;
   }
 </style>
-<div class="col-md-10">
+<div class="col-xs-9">
   <table class="table">
     <tr>
       <th></th>
@@ -11,9 +11,10 @@
       <th>받은 사람</th>
       <th>시간</th>
     </tr>
+<form action="<?=site_url('message/delete')?>?type=send" method="post">
     <?php foreach($message as $message){ ?>
     <tr>
-      <td></td>
+      <td><input name="delete_list[]" value='<?=$message->id?>' type="checkbox"></td>
       <td ><a name="title" href='<?=site_url("message/read/{$message->id}")?>'><?=$message->title?></a></td>
       <td name="name"><?=$message->name?></td>
       <td><?=$message->time?></td>
@@ -36,6 +37,21 @@
     <?php } ?>
   </script>
   </table>
+  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#message-delete_modal">삭제</button>
+  <div class="modal fade bs-example-modal-sm" id="message-delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-body">
+          쪽지를 삭제하시겠습니까?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">아니오</button>
+          <input type="submit" class="btn btn-danger btn-sm" value="삭제">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
   <div id="board-write_btn"><a class="btn btn-danger btn-sm" href='<?=site_url("board/write/")?>'>삭제</a></div>
   <form id="board-search" class="form-inline" action='<?=site_url("board/index/1")?>'>
     <div class="form-group">

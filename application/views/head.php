@@ -55,6 +55,8 @@
                 <li><a href="<?=site_url('user/mypage')?>"><span>내 정보</span></a></li>
                 <li class="divider"></li>
                 <li><a href='<?=site_url("user/mytopic/1")?>'><span>내 게시물</span></a></li>
+                <li class="divider"></li>
+                <li><a onClick="window.open(this.href, '댓글', 'width=800, height=560, toolbar=0, resizalbe=0, menubar=0, location=0'); return false;" href='<?=site_url("message/receive_list/1")?>'><span>쪽지함</span></a></li>
               </ul>
             </li>
           </ul>

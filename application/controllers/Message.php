@@ -84,11 +84,45 @@ class Message extends MY_Controller
         $this->_footer();
     }
 
-    public function read()
+    public function read($id)
     {
+        $this->load->model('message_model');
+        $this->load->model('user_model');
+        $message=$this->message_model->read($id);
+        //자신이 보내거나 받은 메세지가 아닌 메세지에 접근할 경우
+        if(!(($this->session->userdata('id')==$message->sender) || ($this->session->userdata('id')==$message->receiver))){
+            alert_location(site_url('message/receive_list/1'),'잘못된 접근입니다.');
+        }
+        $this->message_model->check_message($id);
+        $message->sender=$this->user_model->getNamefromID($message->sender);
+        $message->receiver=$this->user_model->getNamefromID($message->receiver);
         $this->_head();
         $this->load->view('message_nav');
-        $this->load->view('read_message');
+        $this->load->view('read_message',array('message'=>$message));
         $this->_footer();
+    }
+    public function delete()
+    {
+      $this->load->model('message_model');
+      $delete_list=$this->input->post('delete_list');
+      switch($this->input->get('type'))
+      {
+        case 'receive':
+          if(empty($delete_list)) {
+            alert_location(site_url('message/receive_list/1'),"선택된 쪽지가 없습니다.");
+            break;
+          }
+          $this->message_model->delete('receive',$delete_list);
+          alert_location(site_url('message/receive_list/1'),"삭제 완료");
+          break;
+        case 'send':
+          if(empty($delete_list)) {
+            alert_location(site_url('message/send_list/1'),"선택된 쪽지가 없습니다.");
+            break;
+          }
+          $this->message_model->delete('send',$delete_list);
+          alert_location(site_url('message/send_list/1'),"삭제 완료");
+          break;
+      }
     }
 }

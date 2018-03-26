@@ -23,6 +23,7 @@ class Message_model extends CI_Model{
           $this->db->limit($list, ($page-1)*$list);
           $this->db->order_by('user_message.time', 'DESC');
           $this->db->where('receiver',$this->session->userdata('id'));
+          $this->db->where('receiver_del','0');
 
           return $this->db->get()->result();
 
@@ -36,9 +37,44 @@ class Message_model extends CI_Model{
           $this->db->limit($list, ($page-1)*$list);
           $this->db->order_by('user_message.time', 'DESC');
           $this->db->where('sender',$this->session->userdata('id'));
-
+          $this->db->where('sender_del','0');
           return $this->db->get()->result();
 
+    }
+    public function read($id)
+    {
+        return $this->db->get_where('user_message',array('id'=>$id))->row();
+    }
+    public function check_message($id)
+    {
+        $this->db->where('id',$id);
+        $this->db->update('user_message',array('check'=>'1'));
+    }
+    public function delete($type,$delete_list)
+    {
+        switch ($type)
+        {
+          case 'receive':
+            foreach($delete_list as $list)
+            {
+              $this->db->or_where('id',$list);
+            }
+            $this->db->update('user_message',array('receiver_del'=>'1'));
+            break;
+          case 'send':
+            foreach($delete_list as $list)
+            {
+              $this->db->or_where('id',$list);
+            }
+            $this->db->update('user_message',array('sender_del'=>'1'));
+            break;
+        }
+    }
+    public function delete_cli()
+    {
+      $this->db->where('sender_del','1');
+      $this->db->where('receiver_del','1');
+      $this->db->delete('user_message');
     }
 }
 ?>
