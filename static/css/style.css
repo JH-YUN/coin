@@ -99,3 +99,15 @@ textarea{
 #read-desc{
   margin-left:15px;
 }
+#message-desc{
+  height:200px;
+}
+td.active{
+  width:30%;
+}
+.message-table{
+  border-bottom:solid 1px #ddd;
+}
+#message-send-submit_btn{
+  float:right;
+}
