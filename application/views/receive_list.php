@@ -13,9 +13,9 @@
     </tr>
     <form action="<?=site_url('message/delete')?>?type=receive" method="post">
       <?php foreach($message as $message){ ?>
-      <tr name="<?=$message->check?>">
+      <tr>
         <td><input name="delete_list[]" value='<?=$message->id?>' type="checkbox"></td>
-        <td><a name="title" href='<?=site_url("message/read/{$message->id}")?>'><?=$message->title?></a></td>
+        <td><span name="<?=$message->check?>" class="label label-success"></span>  <a name="title" href='<?=site_url("message/read/{$message->id}")?>'><?=$message->title?></a></td>
         <td name="name"><?=$message->name?></td>
         <td><?=$message->time?></td>
       </tr>
@@ -37,7 +37,7 @@
     <?php } ?>
   </script>
   </table>
-  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#message-delete_modal">삭제</button>
+  <button id="message-list-delete_btn" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#message-delete_modal">삭제</button>
   <div class="modal fade bs-example-modal-sm" id="message-delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -67,5 +67,5 @@
     <div id="board-page"><?php echo $pagination ?></div>
 </div>
 <script>
-  $('[name=0]').addClass('success');
+  $('[name=0]').html('new');
 </script>

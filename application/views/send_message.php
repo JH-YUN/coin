@@ -7,10 +7,10 @@
     ?>
     <div class="form-group">
       <p><label for="">제목</label><input class="form-control" type="text" name="title" placeholder="제목을 입력하세요" value="<?=set_value('title')?>"></p>
-      <?php if(empty($this->input->get('receiver'))): ?>
+      <?php if(empty($receiver)): ?>
         <p><label for="">받는 사람</label><input class="form-control" type="text" name="receiver" placeholder="이름을 입력하세요" value="<?=set_value('receiver')?>"></p>
       <?php else: ?>
-        <p><label for="">받는 사람</label><input class="form-control" type="text" name="receiver" placeholder="이름을 입력하세요" value="<?=$this->input->get('receiver')?>"></p>
+        <p><label for="">받는 사람</label><input class="form-control" type="text" name="receiver" placeholder="이름을 입력하세요" value="<?=$receiver?>"></p>
       <?php endif; ?>
       <p><label for="">본문</label><textarea class="form-control" name="desc" id="desc" cols="30" rows="10" placeholder="내용을 입력하세요" value=""><?=set_value('desc')?></textarea></p>
     </div>

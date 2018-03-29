@@ -17,4 +17,5 @@
   		<td><?=$message->description?></td>
     </tr>
   </table>
+  <a class="btn btn-default btn-sm" href="<?=site_url('message/send')?>?receiver=<?=$message->sender?>">답장</a>
 </div>

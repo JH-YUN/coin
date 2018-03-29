@@ -76,5 +76,21 @@ class Message_model extends CI_Model{
       $this->db->where('receiver_del','1');
       $this->db->delete('user_message');
     }
+    public function notice()
+    {
+      $this->db->where('check','0');
+      $this->db->where('receiver',$this->session->userdata('id'));
+      return $this->db->get('user_message')->num_rows();
+    }
+    public function welcome_message($id)
+    {
+      $this->db->set('receiver',$id);
+      $this->db->set('title','가입을 축하합니다.');
+      $this->db->set('description','암호화폐 가격비교 사이트에 가입해주셔서 감사합니다.');
+      $this->db->set('time','NOW()',false);
+      $this->db->set('sender_del','1');
+      $this->db->insert('user_message');
+
+    }
 }
 ?>

@@ -11,6 +11,7 @@ class User_model extends CI_Model{
     $this->db->set('name',$param['name']);
     $this->db->set('created','NOW()',false);
     $this->db->insert('user');
+    return $this->db->insert_id();
   }
   public function confirm($email)
   {

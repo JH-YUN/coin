@@ -37,7 +37,7 @@
     <?php } ?>
   </script>
   </table>
-  <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#message-delete_modal">삭제</button>
+  <button id="message-list-delete_btn" type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#message-delete_modal">삭제</button>
   <div class="modal fade bs-example-modal-sm" id="message-delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -52,7 +52,6 @@
     </div>
   </div>
 </form>
-  <div id="board-write_btn"><a class="btn btn-danger btn-sm" href='<?=site_url("board/write/")?>'>삭제</a></div>
   <form id="board-search" class="form-inline" action='<?=site_url("board/index/1")?>'>
     <div class="form-group">
       <select class="form-control" name="search_type">

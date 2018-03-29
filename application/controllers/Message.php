@@ -3,8 +3,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class Message extends MY_Controller
 {
+    function __construct()
+    {
+      parent::__construct();
+      if(!$this->session->userdata('is_login')){
+        alert_location(site_url('auth/login').'?returnURL='.rawurlencode(site_url('message/receive_list/1')),'로그인 해주세요.');
+      }
+    }
     public function send()
     {
+        $receiver=!(empty($this->input->get('receiver'))) ? $this->input->get('receiver') : null;
         $this->load->library('form_validation');
         $rules=array(
           array(
@@ -28,7 +36,7 @@ class Message extends MY_Controller
         if ($this->form_validation->run()==false) {
             $this->_head();
             $this->load->view('message_nav');
-            $this->load->view('send_message');
+            $this->load->view('send_message',array('receiver'=>$receiver));
             $this->_footer();
         } else {
             $this->load->model('message_model');
@@ -124,5 +132,15 @@ class Message extends MY_Controller
           alert_location(site_url('message/send_list/1'),"삭제 완료");
           break;
       }
+    }
+    public function notice()
+    {
+      $this->load->model('message_model');
+      echo json_encode($this->message_model->notice());
+    }
+    public function welcome_message($id)
+    {
+      $this->load->model('message_model');
+      $this->message_model->welcome_message($id);
     }
 }
