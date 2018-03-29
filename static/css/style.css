@@ -111,3 +111,9 @@ td.active{
 #message-send-submit_btn{
   float:right;
 }
+#head-nav_badge,#head-nav-message_badge{
+  background-color: red;
+}
+#message-list-delete_btn{
+  float:right;
+}
