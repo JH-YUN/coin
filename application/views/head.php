@@ -37,28 +37,22 @@
             </div>
           </form>
           <ul class="nav navbar-nav navbar-right">
-            <?php
-            if($this->session->userdata('is_login')){
-              ?>
+            <?php if($this->session->userdata('is_login')):?>
              <li><a href="<?=site_url('auth/logout').'?returnURL='.rawurlencode(current_url())?>"><span>Logout</span></a></li>
-            <?php
-          } else{
-            ?>
+             <li class="dropdown">
+               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span>마이페이지  <span id="head-nav_badge" class="badge"></span></span></a>
+               <ul class="dropdown-menu" role="menu">
+                 <li><a href="<?=site_url('user/mypage')?>"><span>내 정보</span></a></li>
+                 <li class="divider"></li>
+                 <li><a href='<?=site_url("user/mytopic/1")?>'><span>내 게시물</span></a></li>
+                 <li class="divider"></li>
+                 <li><a onClick="window.open(this.href, '댓글', 'width=800, height=560, toolbar=0, resizalbe=0, menubar=0, location=0'); return false;" href='<?=site_url("message/receive_list/1")?>'><span>쪽지함  <span id="head-nav-message_badge" class="badge"></span></span></a></li>
+               </ul>
+             </li>
+            <?php else:?>
               <li><a href="<?=site_url('auth/login').'?returnURL='.rawurlencode(current_url())?>"><span>Login</span></a></li>
               <li><a href="<?=site_url('auth/register')?>"><span>회원가입</span></a></li>
-            <?php
-            }
-            ?>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span>마이페이지</span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li><a href="<?=site_url('user/mypage')?>"><span>내 정보</span></a></li>
-                <li class="divider"></li>
-                <li><a href='<?=site_url("user/mytopic/1")?>'><span>내 게시물</span></a></li>
-                <li class="divider"></li>
-                <li><a onClick="window.open(this.href, '댓글', 'width=800, height=560, toolbar=0, resizalbe=0, menubar=0, location=0'); return false;" href='<?=site_url("message/receive_list/1")?>'><span>쪽지함</span></a></li>
-              </ul>
-            </li>
+            <?php endif; ?>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->

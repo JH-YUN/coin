@@ -35,3 +35,4 @@
       <td id="BCC_premium">loading..</td>
     </tr>
   </table>
+  <script type="text/javascript" src="/coin/static/js/ajax.js"></script>
