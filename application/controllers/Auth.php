@@ -66,7 +66,9 @@ class Auth extends MY_Controller
                 'password'=>$pwd,
                 'name'=>$this->input->post('name'));
             $this->load->model('user_model');
-            $this->user_model->register($user);
+            $this->load->model('message_model');
+            $welcome_id=$this->user_model->register($user);
+            $this->message_model->welcome_message($welcome_id);
             $this->session->set_flashdata('msg', '가입을 축하합니다. 로그인 해주세요.');
             redirect('/auth/login');
         }
