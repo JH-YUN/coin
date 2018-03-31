@@ -26,7 +26,7 @@
             <ul class="dropdown-menu" role="menu">
               <li><a href="<?=site_url('user/userprofile')?>?user=<?=$topic->u_id?>">유저 정보</a></li>
               <li><a href="<?=site_url('board/index/1')?>?search_type=search_name&keyword=<?=$topic->name?>">작성글 검색</a></li>
-              <li><a href="#">쪽지 보내기</a></li>
+              <li><a href="<?=site_url('message/send')?>?receiver=<?=$topic->name?>">쪽지 보내기</a></li>
             </ul>
           </div>
         </h4>
