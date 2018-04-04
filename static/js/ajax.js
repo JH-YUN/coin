@@ -8,9 +8,13 @@ function CalPremium(coinkrw,coinusd)
   return (((coinkrw-coinusd)*100)/coinusd).toFixed(2);
 }
 
+function startInterval(seconds, callback) {
+	callback();
+	return setInterval(callback, seconds * 1000);
+}
 
 $(function(){
-  timer=setInterval(function(){//5초에 한번 ajax
+  timer=startInterval(5,function(){//5초에 한번 ajax
     /*
         DB에 저장된 암호화폐의 시세를 불러옴
 {
@@ -61,5 +65,5 @@ $(function(){
       error: function () {
       }
     });
-  },5000);
+  });
 });
